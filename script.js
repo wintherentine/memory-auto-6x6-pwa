@@ -49,3 +49,4 @@ function checkMatch() {
     setTimeout(() => alert("Fantastisch! 🎉 Je hebt alle auto's gevonden!"), 400);
   }
 }
+document.getElementById("reset-button").addEventListener("click", resetGame);
