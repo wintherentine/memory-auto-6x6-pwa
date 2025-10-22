@@ -49,4 +49,32 @@ function checkMatch() {
     setTimeout(() => alert("Fantastisch! 🎉 Je hebt alle auto's gevonden!"), 400);
   }
 }
+
+function resetGame() {
+  // Verwijder alle kaarten uit het bord
+  board.innerHTML = "";
+  
+  // Reset arrays
+  flipped = [];
+  matched = [];
+  
+  // Shuffle opnieuw
+  cards = [...carImages, ...carImages].sort(() => 0.5 - Math.random());
+  
+  // Kaarten opnieuw aanmaken
+  cards.forEach(src => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.src = src;
+
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Auto";
+
+    card.appendChild(img);
+    card.addEventListener("click", flipCard);
+    board.appendChild(card);
+  });
+}
+
 document.getElementById("reset-button").addEventListener("click", resetGame);
