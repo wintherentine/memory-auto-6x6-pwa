@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Memory Game Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #eef2f3;
+      margin: 20px;
+    }
+    #reset-button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    #reset-button:hover {
+      background-color: #0f69d1;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(6, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .card {
+      width: 100px;
+      height: 100px;
+      background: #1e90ff;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Memory Game Test</h1>
+  <button id="reset-button">Start opnieuw</button>
+  <div id="game-board" class="board">
+    <!-- kaarten verschijnen hier -->
+  </div>
+
+  <script>
+    const board = document.getElementById("game-board");
+    const resetButton = document.getElementById("reset-button");
+
+    function initGame() {
+      board.innerHTML = ""; // leegmaken
+      for (let i = 1; i <= 12; i++) {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.textContent = i; // tijdelijke inhoud
+        board.appendChild(card);
+      }
+    }
+
+    resetButton.addEventListener("click", initGame);
+
+    // start game
+    initGame();
+  </script>
+</body>
+</html>
