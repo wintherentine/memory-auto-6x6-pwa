@@ -11,12 +11,32 @@ h1 {
   color: #333;
 }
 
+p {
+  font-size: 16px;
+}
+
+button#reset-button {
+  padding: 10px 20px;
+  margin: 15px 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1e90ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button#reset-button:hover {
+  background-color: #0f69d1;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(6, 100px);
   gap: 10px;
   justify-content: center;
-  margin: 30px auto;
+  margin: 20px auto 40px;
   max-width: 700px;
 }
 
