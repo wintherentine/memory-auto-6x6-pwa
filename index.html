@@ -2,24 +2,22 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Memory Game - Auto’s (6x6)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game Auto's</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1e90ff">
 </head>
 <body>
-  <h1>🚗 Memory Game - Auto’s (6x6)</h1>
-  <p>Zoek de juiste paren! Klik op twee kaarten om te beginnen.</p>
-  <button id="reset-button">Start opnieuw</button>
-  <div id="game-board" class="board"></div>
-
+  <div class="container">
+    <div class="board-container">
+      <div id="game-board" class="board"></div>
+    </div>
+    <div class="sidebar">
+      <h1>🚗 Memory Game</h1>
+      <p id="attempts">Aantal pogingen: 0</p>
+      <button id="reset-button">Start opnieuw</button>
+    </div>
+  </div>
   <script src="script.js"></script>
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('Service Worker geregistreerd'))
-      .catch(err => console.log('Service Worker fout', err));
-  }
-  </script>
 </body>
 </html>

@@ -1,7 +1,6 @@
 {
   "name": "Memory Game Auto's",
-  "short_name": "MemoryAuto",
-  "description": "Leuke memory-game met auto’s!",
+  "short_name": "MemoryGame",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#eef2f3",

@@ -1,73 +1,70 @@
-const carImages = [
-  "images/auto1.jpg","images/auto2.jpg","images/auto3.jpg","images/auto4.jpg",
-  "images/auto5.jpg","images/auto6.jpg","images/auto7.jpg","images/auto8.jpg",
-  "images/auto9.jpg","images/auto10.jpg","images/auto11.jpg","images/auto12.jpg",
-  "images/auto13.jpg","images/auto14.jpg","images/auto15.jpg","images/auto16.jpg",
-  "images/auto17.jpg","images/auto18.jpg"
-];
-
 const board = document.getElementById("game-board");
+const resetButton = document.getElementById("reset-button");
+const attemptsDisplay = document.getElementById("attempts");
+
 let flipped = [];
 let matched = [];
 let cards = [];
+let attempts = 0;
 
 function initGame() {
-  // Maak de kaarten array opnieuw
-  cards = [...carImages, ...carImages].sort(() => 0.5 - Math.random());
+  const values = [];
+  for (let i = 1; i <= 18; i++) values.push(i);
+  cards = [...values, ...values].sort(() => 0.5 - Math.random());
 
-  // Maak bord leeg
   board.innerHTML = "";
+  flipped = [];
+  matched = [];
+  attempts = 0;
+  attemptsDisplay.textContent = "Aantal pogingen: 0";
 
-  // Voeg kaarten toe
-  cards.forEach(src => {
+  cards.forEach(value => {
     const card = document.createElement("div");
     card.classList.add("card");
-    card.dataset.src = src;
-
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = "Auto";
-
-    card.appendChild(img);
+    card.style.backgroundImage = "url('images/back.jpg')";
+    card.dataset.value = value;
     card.addEventListener("click", flipCard);
     board.appendChild(card);
   });
-
-  // Reset arrays
-  flipped = [];
-  matched = [];
 }
 
-// Flip card functie
 function flipCard() {
   if (flipped.length < 2 && !this.classList.contains("flipped") && !matched.includes(this)) {
     this.classList.add("flipped");
+    this.style.backgroundImage = `url('images/${this.dataset.value}.jpg')`;
     flipped.push(this);
 
     if (flipped.length === 2) {
-      setTimeout(checkMatch, 800);
+      attempts++;
+      attemptsDisplay.textContent = "Aantal pogingen: " + attempts;
+      setTimeout(checkMatch, 1500);
     }
   }
 }
 
-// Check match
 function checkMatch() {
   const [a, b] = flipped;
-  if (a.dataset.src === b.dataset.src) {
+  if (a.dataset.value === b.dataset.value) {
     matched.push(a, b);
   } else {
     a.classList.remove("flipped");
     b.classList.remove("flipped");
+    a.style.backgroundImage = "url('images/back.jpg')";
+    b.style.backgroundImage = "url('images/back.jpg')";
   }
   flipped = [];
 
   if (matched.length === cards.length) {
-    setTimeout(() => alert("Fantastisch! 🎉 Je hebt alle auto's gevonden!"), 400);
+    setTimeout(() => {
+      alert("Fantastisch! 🎉 Je hebt alle paren gevonden in " + attempts + " pogingen!");
+    }, 300);
   }
 }
 
-// Reset knop
-document.getElementById("reset-button").addEventListener("click", initGame);
+resetButton.addEventListener("click", initGame);
 
-// Start game bij laden
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+
 initGame();
